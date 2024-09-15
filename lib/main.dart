@@ -1,4 +1,5 @@
 import 'package:clothes_app/users/authentiation/login_screen.dart';
+import 'package:clothes_app/users/authentiation/signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
       //     return LoginScreen();
       //   },
       // ),
-      home: LoginScreen(),
+      home: SignUpScreen(),
     );
   }
 }
