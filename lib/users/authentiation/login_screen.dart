@@ -53,6 +53,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           padding: const EdgeInsets.fromLTRB(30, 30, 30, 8),
                           child: Column(
                             children: [
+                              //email-password-login btn
                               Form(
                                 key: formKey,
                                 child: Column(
@@ -194,7 +195,56 @@ class _LoginScreenState extends State<LoginScreen> {
                                     )
                                   ],
                                 ),
-                              )
+                              ),
+
+                              SizedBox(
+                                height: 16,
+                              ),
+
+                              // do not have account btn
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Text("Don't have an accout?",
+                                      style: TextStyle(color: Colors.white)),
+                                  TextButton(
+                                    onPressed: () {},
+                                    child: const Text(
+                                      "SignUp Here",
+                                      style: TextStyle(
+                                        color: Colors.blue,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+
+                              const Text(
+                                "Or",
+                                style: TextStyle(
+                                  color: Colors.blue,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              // admin
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Text("If you are admin ?",
+                                      style: TextStyle(color: Colors.white)),
+                                  TextButton(
+                                    onPressed: () {},
+                                    child: const Text(
+                                      "click  Here",
+                                      style: TextStyle(
+                                        color: Colors.blue,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ],
                           ),
                         )),
