@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:clothes_app/api_connection/api_connection.dart';
 import 'package:clothes_app/users/authentiation/login_screen.dart';
+import 'package:clothes_app/users/model/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -30,13 +31,29 @@ class _SignUpScreenState extends State<SignUpScreen> {
         },
       );
       if (res.statusCode == 200) {
-        var resBody = jsonDecode(res.body);
-        if (resBody['EmailFound']) {
+        var resBodyOfValidateEmail = jsonDecode(res.body);
+        if (resBodyOfValidateEmail['EmailFound']) {
           Fluttertoast.showToast(msg: "Email already exists");
         } else {
           // signUp and save new user to the database
+          RegisterAndSaveUserRecord();
         }
       }
+    } catch (e) {}
+  }
+
+  RegisterAndSaveUserRecord() async {
+    User userModel = User(
+      1,
+      nameController.text.trim(),
+      emailController.text.trim(),
+      passwordController.text.trim(),
+    );
+    try {
+      var res = await http.post(
+        Uri.parse(API.signUp),
+        body: userModel.toJson(),
+      );
     } catch (e) {}
   }
 
