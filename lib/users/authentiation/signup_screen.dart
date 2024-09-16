@@ -32,7 +32,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       );
       if (res.statusCode == 200) {
         var resBodyOfValidateEmail = jsonDecode(res.body);
-        if (resBodyOfValidateEmail['EmailFound']) {
+        if (resBodyOfValidateEmail['EmailFound'] == true) {
           Fluttertoast.showToast(msg: "Email already exists");
         } else {
           // signUp and save new user to the database
