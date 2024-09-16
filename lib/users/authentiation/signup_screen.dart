@@ -1,7 +1,12 @@
+import 'dart:convert';
+
+import 'package:clothes_app/api_connection/api_connection.dart';
 import 'package:clothes_app/users/authentiation/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 
 class SignUpScreen extends StatefulWidget {
   @override
@@ -16,7 +21,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
   var passwordController = TextEditingController();
   var isObsecure = true.obs;
 
-  validateUserEmail() {}
+  validateUserEmail() async {
+    try {
+      var res = await http.post(
+        Uri.parse(API.validateEmail),
+        body: {
+          'user_email': emailController.text.trim(),
+        },
+      );
+      if (res.statusCode == 200) {
+        var resBody = jsonDecode(res.body);
+        if (resBody['EmailFound']) {
+          Fluttertoast.showToast(msg: "Email already exists");
+        } else {
+          // signUp and save new user to the database
+        }
+      }
+    } catch (e) {}
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
