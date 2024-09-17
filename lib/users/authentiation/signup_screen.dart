@@ -39,7 +39,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
           RegisterAndSaveUserRecord();
         }
       }
-    } catch (e) {}
+    } catch (e) {
+      print(e.toString());
+      Fluttertoast.showToast(msg: e.toString());
+    }
   }
 
   RegisterAndSaveUserRecord() async {
@@ -54,7 +57,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
         Uri.parse(API.signUp),
         body: userModel.toJson(),
       );
-    } catch (e) {}
+      if (res.statusCode == 200) {
+        var resBodyOfSignUp = jsonDecode(res.body);
+        if (resBodyOfSignUp['success'] == true) {
+          Fluttertoast.showToast(msg: "signUp successfuly...");
+
+          setState(() {
+            nameController.clear();
+            emailController.clear();
+            passwordController.clear();
+          });
+        } else {
+          Fluttertoast.showToast(msg: "Error Try again");
+        }
+      }
+    } catch (e) {
+      print(e.toString());
+      Fluttertoast.showToast(msg: e.toString());
+    }
   }
 
   @override
